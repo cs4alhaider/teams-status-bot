@@ -19,8 +19,8 @@ email = "REPLACE_THIS_WITH_YOUR_TEAMS_EMAIL_ADDRESS"
 # Password
 password = "REPLACE_THIS_WITH_YOUR_PASSWORD"
 
-# The frequency that you want to update your status in minuts
-updateEvery = 1  # => in minuts, means it will update your status ever one minute
+# The frequency that you want to update your status in minutes
+updateEvery = 1  # => in minutes, means it will update your status ever one minute
 
 # For how long you want to keep this running, default = 1 hour
 forHours = 8  # => in hours, means it will keep the program running for 8 hours
