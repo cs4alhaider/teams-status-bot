@@ -147,7 +147,7 @@ def runAutomation(email, password, every, hours):
 # MAIN RUNNING POINT OF THIS APP
 runAutomation(
     email=email,
-    password=email,
+    password=password,
     every=updateEvery,
     hours=forHours
 )
