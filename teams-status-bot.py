@@ -2,6 +2,8 @@
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver import ActionChains
+from datetime import datetime
 import time
 
 
@@ -39,6 +41,7 @@ def setupDriver():
     # or a command to complete.
     # This method only needs to be called one time per session.
     driver.implicitly_wait(45)
+    driver.set_page_load_timeout(30)
 
 
 def findElement(xPath, _driver=driver):
@@ -59,7 +62,7 @@ def findElement(xPath, _driver=driver):
 
 def login(email, password):
     # getting email text box
-    emailBox = findElement("/html/body/div/form[1]/div/div/div[1]/div[2]/div[2]/div/div/div/div[2]/div[2]/div/input[1]")
+    emailBox = findElement("/html/body/div/form[1]/div/div/div[2]/div[1]/div/div/div/div/div[1]/div[3]/div/div/div/div[2]/div[2]/div/input[1]")
 
     # adding email address in the text box
     emailBox.send_keys(email)
@@ -76,6 +79,10 @@ def login(email, password):
     # clicking enter to continue
     passwordBox.send_keys(Keys.RETURN)
 
+    useOTP = findElement("/html/body/div/form[1]/div/div/div[2]/div[1]/div/div/div/div/div/div/div[1]/div/div[2]/div[2]/div/div[2]/div/div[2]/div/div[1]/div/div/div[2]/div")
+
+    useOTP.click()
+
 
 def stayLoggedIn(value: bool = False):
     if value:
@@ -83,17 +90,19 @@ def stayLoggedIn(value: bool = False):
         saveSession.send_keys(Keys.RETURN)
     else:
         # don't stay logged in
-        saveSession = findElement("/html/body/div/form/div[1]/div/div[1]/div[2]/div/div[2]/div/div[3]/div[2]/div/div/div[1]/input")
+        saveSession = findElement("/html/body/div/form/div/div/div[2]/div[1]/div/div/div/div/div/div/div[1]/div[2]/div/div[2]/div/div[3]/div[2]/div/div/div[1]/input")
         saveSession.send_keys(Keys.RETURN)
 
 
 def useTeamsOnTheWeb():
     # use MS teams on the web
-    useOnWeb = findElement("/html/body/promote-desktop/div/div/div/div[1]/div[2]/div/a")
-    useOnWeb.click()
+    # useOnWeb = findElement("/html/body/promote-desktop/div/div/div/div[1]/div[2]/div/a")
+    # useOnWeb.click()
+    # print("useOnWeb has been clicked 😎 ..")
+    time.sleep(5)
 
 
-def updateStatus(status: str = "/available"):
+def updateStatus(status: str = "/busy"):
     """
         Set your profile status to whatever you pass.
 
@@ -112,8 +121,17 @@ def updateStatus(status: str = "/available"):
     select = findElement("/html/body/div[2]/div[1]/app-header-bar/div/power-bar/div/div/form/slash-command-box/div/slash-command-popover/div/div[2]/ul/li/div")
     select.click()
 
+    # datetime object containing current date and time
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    print("updateStatus, 😎 .. date and time =", dt_string)
 
-def keepUpdating(status: str = "/available", every: int = 5, hours: int = 1):
+# busy
+# available
+
+
+def keepUpdating(status: str = "/busy", every: int = 5, hours: int = 1):
     """
         Automate updating your status with time logic.
 
