@@ -61,4 +61,4 @@ $ python3 teams-status-bot.py
 
 ## License
 
-NetworkKit is available under the MIT license. See the LICENSE file for more info.
+teams-status-bot is available under the MIT license. See the LICENSE file for more info.
